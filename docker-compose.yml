@@ -1,0 +1,16 @@
+
+
+services:
+  qr_server:
+    build: .
+    container_name: qr_server
+    ports:
+      - "8000:8000"
+    restart: unless-stopped
+    networks:
+      - qr_network
+
+networks:
+  qr_network:
+    driver: bridge
+  
