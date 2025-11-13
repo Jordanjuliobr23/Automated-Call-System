@@ -1,0 +1,9 @@
+{
+  "POSTGRES_DB": "cnatdb",
+  "POSTGRES_USER": "cnatuser",
+  "POSTGRES_PASSWORD": "supersecret",
+  "SUAP_BASE_URL": "https://suap.ifrn.edu.br",
+  "SUAP_CLIENT_ID": "xxxxx",
+  "SUAP_CLIENT_SECRET": "yyyyy",
+  "QR_SERVICE_URL": "http://backend:8000"
+}
