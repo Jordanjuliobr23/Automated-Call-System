@@ -5,10 +5,14 @@
   --color-gold: #fccb29;
 
   --font-primary: sans-serif;
-}
+}**/
 
 * {
   padding: 0;
   margin: 0;
-  font-family: var(--font-primary);
-}**/
+}
+
+#ImgLogo {
+  border-radius: 90px;
+  width: 65px;
+}

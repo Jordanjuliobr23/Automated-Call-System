@@ -1,0 +1,16 @@
+{% load static %}
+
+<nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="#">
+        <img class="me-3" id="ImgLogo" src="{% static 'img/logo.png' %}"/>
+        Sistema de Chamada Automatica</a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarSupportedContent">
+        <a href="{% url 'index' %}"><button type="button" class="btn btn-primary me-3">Aluno</button></a>
+        <a href="{% url 'professor' %}"><button type="button" class="btn btn-secondary" >Professor</button></a>
+    </div>
+</nav>

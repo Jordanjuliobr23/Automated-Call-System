@@ -33,7 +33,7 @@ OTHER_APPS = [
 ]
 
 MY_APPS = [
-    'core.apps.CoreConfig',
+    'paginas.apps.PaginasConfig',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + OTHER_APPS + MY_APPS
