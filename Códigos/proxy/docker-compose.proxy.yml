@@ -1,13 +1,6 @@
-services:
-  qr_server:
-    build: ./Códigos/qr_server
-    container_name: qr_server
-    ports:
-      - "8000:8000"
-    restart: unless-stopped
-    networks:
-      - qr_network
+version: '3.8'
 
+services:
   proxy:
     image: nginx:stable-alpine
     container_name: proxy
@@ -17,12 +10,11 @@ services:
       - ./Códigos/proxy/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./Códigos/frontend/static:/var/www/static:ro
     depends_on:
-      - qr_server
+      - frontend
+      - backend
     networks:
       - qr_network
-    restart: unless-stopped
 
 networks:
   qr_network:
-    driver: bridge
-  
+    external: true
