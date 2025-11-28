@@ -3,8 +3,14 @@
 ## 📋 About the project:
 - This is a academy project from discipline **Integrative Project**
 - The project consists of developing a solution for classroom attendance automation.
+- Authentication occurs through an application that generates QR codes, which redirects to the IFRN institutional login page (SUAP).
+- After the student has been redirected to the SUAP portal, they will authenticate with their enrollment number and institutional password. This will allow the system to confirm their attendance in the current class.
+
 
 ---
+
+## ⚙︎ Manager from the project:
+
 
 ## 🛠️ Project Structure
 
