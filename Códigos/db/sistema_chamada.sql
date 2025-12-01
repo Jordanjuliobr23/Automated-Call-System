@@ -2,17 +2,17 @@ create schema sistema_chamada;
 
 --Tabela Professor
 CREATE TABLE sistema_chamada.professor (
-    matriculaProfessor VARCHAR(20) PRIMARY KEY,
-    senhaProfessor VARCHAR(200) NOT NULL,
-    nomeProfessor VARCHAR(100) NOT NULL
+    matriculaProfessor VARCHAR(14) UNIQUE NOT NULL PRIMARY KEY,
+    nomeProfessor VARCHAR(150) NOT NULL,
+    senhaProfessor VARCHAR(200) NOT NULL    
 );
 
 --Tabela disciplina
 CREATE TABLE sistema_chamada.disciplina (
     idDisciplina SERIAL PRIMARY KEY,
-    nomeDisciplina VARCHAR(100) NOT NULL,
-    siglaDisciplina VARCHAR(20),
-    curso VARCHAR(100)
+    nomeDisciplina VARCHAR(150) NOT NULL,
+    siglaDisciplina VARCHAR(20) NOT NULL,
+    curso VARCHAR(150) NOT NULL
 );
 
 --Tabela horário
@@ -20,15 +20,15 @@ CREATE TABLE sistema_chamada.horario (
     idHorario SERIAL PRIMARY KEY,
     horaInicio TIME NOT NULL,
     horaFim TIME NOT NULL,
-    tolerancia INTERVAL  
+    tolerancia TIME NOT NULL 
 );
 
 -- Tabelas que referenciam professor/disciplina/horario
 CREATE TABLE sistema_chamada.diario (
     idDiario SERIAL PRIMARY KEY,
-    turno VARCHAR(30),
-    disciplina INT NOT NULL REFERENCES sistema_chamada.disciplina(idDisciplina),
-    professor VARCHAR(20) NOT NULL REFERENCES sistema_chamada.professor(matriculaProfessor)
+    turno VARCHAR(30) NOT NULL,
+    disciplina INT NOT NULL REFERENCES sistema_chamada.disciplina(idDisciplina) ON DELETE CASCADE,
+    professor VARCHAR(14) NOT NULL REFERENCES sistema_chamada.professor(matriculaProfessor)
 );
 
 --Tabela aula
@@ -43,13 +43,13 @@ CREATE TABLE sistema_chamada.aula (
 
 --Tabela Aluno 
 CREATE TABLE sistema_chamada.aluno (
-    matriculaAluno VARCHAR(20) PRIMARY KEY,
-    nomeAluno VARCHAR(100) NOT NULL
+    matriculaAluno VARCHAR(14) UNIQUE NOT NULL PRIMARY KEY,
+    nomeAluno VARCHAR(150) NOT NULL
 );
 
 --Tabela Chave 
 CREATE TABLE sistema_chamada.chave (
-    codigo VARCHAR(50) PRIMARY KEY,
+    codigo VARCHAR(50) UNIQUE NOT NULL PRIMARY KEY,
     status BOOLEAN NOT NULL,
     criadoEm TIMESTAMP DEFAULT now(),
     usadoEm TIMESTAMP,
