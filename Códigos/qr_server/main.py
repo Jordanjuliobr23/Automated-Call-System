@@ -6,6 +6,8 @@ import qrcode
 import requests
 from typing import Optional
 
+#openssl rand -hex 4
+
 app = FastAPI()
 TOKENS = {}
 
