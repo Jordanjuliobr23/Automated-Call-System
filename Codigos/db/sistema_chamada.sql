@@ -4,7 +4,7 @@ create schema sistema_chamada;
 CREATE TABLE sistema_chamada.professor (
     matriculaProfessor VARCHAR(14) UNIQUE NOT NULL PRIMARY KEY,
     nomeProfessor VARCHAR(150) NOT NULL,
-    senhaProfessor VARCHAR(200) NOT NULL    
+    senhaProfessor VARCHAR(25) NOT NULL    
 );
 
 --Tabela disciplina
