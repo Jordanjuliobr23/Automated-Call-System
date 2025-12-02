@@ -14,15 +14,11 @@ RUN python -m venv /py && \
         gcc \
         build-essential \
         libpq-dev \
-        curl \ 
-        tzdata && \
+        curl && \
     /py/bin/pip install -r /tmp/requirements.txt && \
     rm -rf /var/lib/apt/lists/* /tmp && \
-    adduser --disabled-password --no-create-home django-user && \
-    ln -fs /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime && \
-    dpkg-reconfigure -f noninteractive tzdata 
+    adduser --disabled-password --no-create-home django-user
 
 ENV PATH="/py/bin:$PATH"
-ENV TZ=America/Sao_Paulo
 
 USER django-user

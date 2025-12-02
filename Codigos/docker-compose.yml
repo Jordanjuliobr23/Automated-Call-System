@@ -1,27 +1,26 @@
 services:
-  proxy:
-    image: nginx:stable-alpine
-    container_name: proxy
-    ports:
-      - "80:80"
-    volumes:
-      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
-      - ./frontend/static:/var/www/static:ro
-    depends_on:
-      - qr_server
-      - frontend
-    networks:
-      - qr_network
-    restart: unless-stopped
+  #proxy:
+  #  image: nginx:stable-alpine
+  #  container_name: proxy
+  #  ports:
+  #    - "8000:8000"
+  #  volumes:
+  #    - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+  #    - ./frontend/static:/var/www/static:ro
+  #  depends_on:
+  #    - qr_server
+  #  networks:
+  #    - qr_network
+  #  restart: unless-stopped
 
-  qr_server:
-    build: ./qr_server
-    container_name: qr_server
-    ports:
-      - "8080:8080"
-    networks:
-      - qr_network
-    restart: unless-stopped
+  #qr_server:
+  #  build: ./qr_server
+  #  container_name: qr_server
+  #  ports:
+  #    - "80:80"
+  #  restart: unless-stopped
+  #  networks:
+  #    - qr_network
 
   db:
     image: postgres:17.7-trixie
@@ -34,7 +33,6 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
-    restart: unless-stopped
 
   frontend:
     build: ./frontend
@@ -53,11 +51,11 @@ services:
       - DB_PORT=5432
     depends_on:
       - db
-    restart: unless-stopped
 
 volumes:
   db_python:
 
-networks:
-  qr_network:
-    driver: bridge
+
+#networks:
+#  qr_network:
+#    driver: bridge
