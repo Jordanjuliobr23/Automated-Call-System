@@ -1,0 +1,61 @@
+services:
+  proxy:
+    image: nginx:stable-alpine
+    container_name: proxy
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./frontend/static:/var/www/static:ro
+    depends_on:
+      - qr_server
+    networks:
+      - qr_network
+    restart: unless-stopped
+
+  qr_server:
+    build: ./qr_server
+    container_name: qr_server
+    ports:
+      - "9000:9000"
+    restart: unless-stopped
+    networks:
+      - qr_network
+
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - db_python:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
+
+  frontend:
+    build: 
+      context: ./frontend
+    container_name: frontend
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/app
+    command: >
+      sh -c "python manage.py migrate" &&
+            "python manage.py runserver 0.0.0.0:80"
+    environment:
+      - DB_HOST=db
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASSWORD=postgres
+    depends_on:
+      - db
+
+volumes:
+  db_python:
+
+networks:
+  qr_network:
+    driver: bridge
+  
