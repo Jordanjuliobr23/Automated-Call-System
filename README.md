@@ -31,4 +31,25 @@ The Nginx proxy routes requests to the frontend and backend services and serves 
 - Docker and Docker Compose installed
 - Services `frontend` and `backend` must be running on the same Docker network (`qr_network`)
 
+###Commands to start the containers
+
+*Enter the Codes directory:
+cd .\Codigos\
+
+*Then execute the commands below:
+
+docker compose compilation
+docker compose -d
+
+***NOTE: Open Docker Desktop before starting the process.
+
+Access the browser:
+Django:
+http://localhost:8000
+
+Qr_Server
+http://localhost:8080
+
+http://localhost:8080/generate_qr
+
 
