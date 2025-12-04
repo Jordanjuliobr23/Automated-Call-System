@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+dist/
+eggs/
+*.egg-info/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+*.egg
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# pyenv
+venv/
+ENV/
+env/
+.env
+.venv
+
+# Virtualenv
+venv/
+ENV/
+env.bak/
+
+# VS Code
+.vscode/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# SQLite DB
+**/db.sqlite3
+**/db/*.sqlite3
+**/Códigos/frontend/db.sqlite3
+
+# Django stuff:
+*.log
+local_settings.py
+media
+staticfiles
+
+# Python bytecode cache
+**/__pycache__/
+
+# Ignore compiled frontend assets / node_modules if any
+node_modules/
+npm-debug.log
+
+# Ignore pytest cache
+.pytest_cache/
