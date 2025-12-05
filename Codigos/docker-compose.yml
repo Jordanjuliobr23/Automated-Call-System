@@ -2,8 +2,6 @@ services:
   proxy:
     image: nginx:stable-alpine
     container_name: proxy
-    ports:
-      - "80:80"
     volumes:
       - ./proxy/nginx.conf:/etc/nginx/nginx.conf:ro
       - ./frontend/static:/var/www/static:ro
@@ -18,7 +16,7 @@ services:
     build: ./qr_server
     container_name: qr_server
     ports:
-      - "8080:8080"
+      - "8001:8001"
     networks:
       - qr_network
     restart: unless-stopped

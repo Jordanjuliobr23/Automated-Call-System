@@ -48,8 +48,8 @@ Django:
 http://localhost:8000
 
 Qr_Server
-http://localhost:8080
+http://localhost:8001
 
-http://localhost:8080/generate_qr
+http://localhost:8001/gera_qr
 
 
