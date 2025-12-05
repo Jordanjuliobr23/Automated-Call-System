@@ -4,6 +4,3 @@ from django.views.generic import TemplateView
 
 class IndexView(TemplateView):
     template_name= 'paginas/pages/index.html'
-
-class ProfessorView(TemplateView):
-    template_name= 'paginas/pages/professor.html'
