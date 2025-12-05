@@ -1,0 +1,20 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block conteudo %}
+
+<h3>Login</h3>
+<p>Utilize a matrícula e senha do SUAP</p>
+
+<hr>
+
+<form action="" method="POST">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <button type="submit" class="btn btn-outline-success">Enviar</button> 
+
+</form>
+
+{% endblock conteudo %}

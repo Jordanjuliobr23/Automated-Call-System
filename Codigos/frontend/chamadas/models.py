@@ -59,6 +59,7 @@ class Aula(models.Model):
 class Aluno(models.Model):
     matricula = models.CharField(max_length=14, primary_key=True, unique=True, verbose_name="Matrícula")
     nome = models.CharField(max_length=150)
+    senha = models.CharField(max_length=128)
 
     def __str__(self):
         return f"{self.nome} | {self.matricula}"
