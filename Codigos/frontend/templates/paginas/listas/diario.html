@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block conteudo %}
+
+<h3>Lista de Diarios registradas</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Turno</th>
+            <th>Disciplina</th>
+            <th>Professor</th>
+        </tr>
+
+        {% for diario in object_list %}
+        <tr>
+            <td>{{ diario.turno }}</td>
+            <td>{{ diario.disciplina }}</td>
+            <td>{{ diario.professor }}</td>
+        </tr>    
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhum diario registrado.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock conteudo %}

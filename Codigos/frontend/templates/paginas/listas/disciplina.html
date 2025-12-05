@@ -1,0 +1,30 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block conteudo %}
+
+<h3>Lista de Disciplinas registradas</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Nome</th>
+            <th>Sigla</th>
+            <th>Curso</th>
+        </tr>
+
+        {% for disciplina in object_list %}
+        <tr>
+            <td>{{ disciplina.nome }}</td>
+            <td>{{ disciplina.sigla }}</td>
+            <td>{{ disciplina.curso }}</td>
+        </tr>    
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhuma disciplina registrada.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock conteudo %}

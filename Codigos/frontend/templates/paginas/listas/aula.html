@@ -1,0 +1,36 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block conteudo %}
+
+<h3>Lista de Aulas registradas</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Data</th>
+            <th>Número de Aulas</th>
+            <th>Conteúdo</th>
+            <th>Disciplina</th>
+            <th>Professor</th>
+            <th>Horário</th>
+        </tr>
+
+        {% for aula in object_list %}
+        <tr>
+            <td>{{ aula.data }}</td>
+            <td>{{ aula.numAula }}</td>
+            <td>{{ aula.conteudo }}</td>
+            <td>{{ aula.diario.disciplina }}</td>
+            <td>{{ aula.diario.professor }}</td>
+            <td>{{ aula.horario }}</td>
+        </tr>    
+        {% empty %}
+        <tr>
+            <td colspan="3">Nenhuma aula registrada.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock conteudo %}
