@@ -55,7 +55,17 @@ class Aula(models.Model):
     
 
 # Bloco inferior até chamada
+    
+class Chave(models.Model):
+    codigo = models.CharField(max_length=50, primary_key=True, unique=True, verbose_name="Código")
+    status = models.BooleanField(default=False)
+    criadoEm = models.DateTimeField(default=timezone.now)
+    
+    aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
 
+    def __str__(self):
+        return f"{self.codigo} | {'Expirada' if self.status else 'Ativa'} | {self.aula}"
+    
 class Aluno(models.Model):
     matricula = models.CharField(max_length=14, primary_key=True, unique=True, verbose_name="Matrícula")
     nome = models.CharField(max_length=150)
@@ -63,19 +73,6 @@ class Aluno(models.Model):
 
     def __str__(self):
         return f"{self.nome} | {self.matricula}"
-    
-class Chave(models.Model):
-    codigo = models.CharField(max_length=50, primary_key=True, unique=True, verbose_name="Código")
-    status = models.BooleanField(default=False)
-    criadoEm = models.DateTimeField(default=timezone.now)
-    usadoEm = models.DateTimeField(null=True, blank=True)
-    
-    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE,  null=True, blank=True)
-    aula = models.ForeignKey(Aula, on_delete=models.CASCADE, null=True, blank=True)
-
-    def __str__(self):
-        return f"{self.codigo} | {'Usada' if self.status else 'Ativa'} | {self.aluno}"
-
 
 #Chamada (classe principal)
 
@@ -87,8 +84,7 @@ class Chamada(models.Model):
     
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
-    horario = models.ForeignKey(Horario, on_delete=models.SET_NULL, null=True, blank=True)
-    chave = models.ForeignKey(Chave, on_delete=models.SET_NULL, null=True, blank=True)
+    chave = models.ForeignKey(Chave, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida} | {self.presencas}"
