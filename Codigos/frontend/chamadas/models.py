@@ -36,7 +36,6 @@ class Horario(models.Model):
     id = models.AutoField(primary_key=True)
     horaInicio = models.TimeField()
     horaFim = models.TimeField()
-    tolerancia = models.TimeField()
 
     def __str__(self):
         return f"{self.horaInicio.strftime('%H:%M')} | {self.horaFim.strftime('%H:%M')}"
@@ -84,7 +83,7 @@ class Chamada(models.Model):
     
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
-    chave = models.ForeignKey(Chave, on_delete=models.SET_NULL)
+    chave = models.ForeignKey(Chave, on_delete=models.PROTECT)
 
     def __str__(self):
         return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida} | {self.presencas}"

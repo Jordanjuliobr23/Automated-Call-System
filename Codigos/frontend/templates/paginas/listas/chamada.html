@@ -1,0 +1,35 @@
+{% extends 'base.html' %} {% load static %}
+
+{% block conteudo %}
+
+<h3>Lista de Chamadas registradas</h3>
+<hr>
+<div class="table-responsive">
+    <table class="table table-striped">
+        <tr>
+            <th>Aluno</th>
+            <th>Entrada</th>
+            <th>Saida</th>
+            <th>Presenças</th>
+            <th>Faltas</th>
+            <th>Opções</th>
+        </tr>
+
+        {% for chamada in object_list %}
+        <tr>
+            <td>{{ chamada.aluno }}</td>
+            <td>{{ chamada.horaEntrada }}</td>
+            <td>{{ chamada.horaSaida }}</td>
+            <td>{{ chamada.presencas }}</td>
+
+        </tr>    
+        {% empty %}
+        <tr>
+            <td colspan="6">Nenhuma chamada registrado.</td>
+        </tr>
+        {% endfor %}
+
+    </table>
+</div>
+
+{% endblock conteudo %}

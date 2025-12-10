@@ -10,9 +10,8 @@
             <th>Data</th>
             <th>Número de Aulas</th>
             <th>Conteúdo</th>
-            <th>Disciplina</th>
-            <th>Professor</th>
             <th>Horário</th>
+            <th>Opções</th>
         </tr>
 
         {% for aula in object_list %}
@@ -20,13 +19,11 @@
             <td>{{ aula.data }}</td>
             <td>{{ aula.numAula }}</td>
             <td>{{ aula.conteudo }}</td>
-            <td>{{ aula.diario.disciplina }}</td>
-            <td>{{ aula.diario.professor }}</td>
             <td>{{ aula.horario }}</td>
         </tr>    
         {% empty %}
         <tr>
-            <td colspan="3">Nenhuma aula registrada.</td>
+            <td colspan="4">Nenhuma aula registrada.</td>
         </tr>
         {% endfor %}
 

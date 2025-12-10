@@ -1,6 +1,6 @@
 from django.urls import path
 from .views import registrar_aluno, ProfessorCreate
-from .views import DisciplinaList, DiarioList, AulaList, AlunoList
+from .views import DisciplinaList, DiarioList, AulaList, AlunoList, ChamadaList
 
 urlpatterns = [
     #path("", IndexView.as_view(), name="index"),
@@ -10,4 +10,5 @@ urlpatterns = [
     path("professor/listar/diario", DiarioList.as_view(), name="listar-diario"),
     path("professor/listar/aula", AulaList.as_view(), name="listar-aula"),
     path("professor/listar/aluno", AlunoList.as_view(), name="listar-aluno"),
+    path("professor/listar/chamada", ChamadaList.as_view(), name="listar-chamada"),
 ]

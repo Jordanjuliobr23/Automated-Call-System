@@ -3,7 +3,7 @@ from django.views.generic.list import ListView
 from django.shortcuts import render, redirect
 from django.utils import timezone
 from django.urls import reverse_lazy
-from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno
+from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada
 from .forms import AlunoForm, ProfessorForm
 
 # Create your views here.
@@ -51,3 +51,7 @@ class AulaList(ListView):
 class AlunoList(ListView):
     model = Aluno
     template_name = 'paginas/listas/aluno.html'
+
+class ChamadaList(ListView):
+    model = Chamada
+    template_name = 'paginas/listas/chamada.html'
