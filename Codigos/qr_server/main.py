@@ -12,7 +12,7 @@ app = FastAPI()
 TOKENS = {}
 
 TIME = 180 
-SUAP_URL = "https://suap.ifrn.edu.br"
+url = "http://localhost:8000/aluno/"
 
 
 @app.get("/gera_qr")
@@ -22,29 +22,29 @@ async def gera_qr():
     expira = agora + timedelta(seconds=TIME)
 
 
-    suap_url = f"{SUAP_URL}/accounts/login/"
+    
     
     TOKENS[token] = {
         "crie": agora, 
         "expira": expira, 
         "use": False, 
         "used_at": None,
-        "auth_url": suap_url,  
+        "auth_url": url,  
         "user_data": None,
         "access_token": None,
         "authenticated": False  
     }
     
     
-    png = qrcode.make(suap_url)
+    png = qrcode.make(url)
     buf = io.BytesIO()
     png.save(buf, format="PNG")
     buf.seek(0)
 
     return {
         "token": token, 
-        "auth_url": suap_url,
-        "qr_code_url": f"http://localhost:8000/qr_image/{token}"
+        "auth_url": url,
+        "qr_code_url": f"http://localhost:8001/qr_image/{token}"
     }
 
 
