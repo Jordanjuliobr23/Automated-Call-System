@@ -11,16 +11,6 @@ services:
     networks:
       - qr_network
     restart: unless-stopped
-
-  #qr_server:
-  #  build: ./qr_server
-  #  container_name: qr_server
-  #  ports:
-  #    - "8001:8001"
-  #  networks:
-  #    - qr_network
-  #  restart: unless-stopped
-
   db:
     image: postgres:17.7-trixie
     container_name: db

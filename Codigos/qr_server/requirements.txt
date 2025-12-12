@@ -1,4 +1,0 @@
-fastapi
-uvicorn
-qrcode[pil]
-requests
