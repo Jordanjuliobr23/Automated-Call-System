@@ -1,20 +1,19 @@
-{% extends 'base.html' %} {% load static %}
+{% extends 'base.html' %}
+{% load static %}
 
 {% block conteudo %}
 
-<h3>Registro de frequência</h3>
-<p>Utilize a matrícula e senha do SUAP</p>
-
+<h3>Registro de Frequência</h3>
+<p>Utilize matrícula e senha do SUAP</p>
 <hr>
 
 <form action="" method="POST">
-
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <button type="submit" class="btn btn-outline-success">Enviar</button> 
 
+    <button type="submit" class="btn btn-outline-success mt-3">Enviar</button>
 </form>
 
-{% endblock conteudo %}
+{% endblock %}
