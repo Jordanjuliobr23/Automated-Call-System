@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import secrets
 
 # Bloco Superior até Chamada
 
@@ -56,7 +57,7 @@ class Aula(models.Model):
 # Bloco inferior até chamada
     
 class Chave(models.Model):
-    codigo = models.CharField(max_length=50, primary_key=True, unique=True, verbose_name="Código")
+    codigo = models.CharField(max_length=64, primary_key=True, unique=True, verbose_name="Código",default=secrets.token_urlsafe)
     status = models.BooleanField(default=False)
     criadoEm = models.DateTimeField(default=timezone.now)
     

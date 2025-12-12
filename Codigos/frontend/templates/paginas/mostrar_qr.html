@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block conteudo %}
+
+<h3>QR Code da Aula</h3>
+
+<img src="data:image/png;base64,{{ qr_code }}" alt="QR Code" style="width:250px"/>
+
+<p>Tempo restante: <span id="timer"></span></p>
+
+<script>
+    let total = {{ segundos_restantes }};
+    const timerEl = document.getElementById("timer");
+
+    const intervalo = setInterval(() => {
+        let minutos = Math.floor(total / 60);
+        let segundos = total % 60;
+
+        timerEl.textContent = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+
+        if (total <= 0) {
+            clearInterval(intervalo);
+
+            // marca a chave como usada
+            fetch("{% url 'expirar_chave' chave.codigo %}", {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                },
+            }).then(() => {
+                timerEl.textContent = "Expirada";
+            });
+        }
+
+        total -= 1;
+
+    }, 1000);
+</script>
+
+{% endblock %}

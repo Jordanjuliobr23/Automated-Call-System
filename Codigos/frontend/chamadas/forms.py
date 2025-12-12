@@ -2,13 +2,16 @@ from django import forms
 from .models import Aluno, Chave, Professor
 
 class AlunoForm(forms.ModelForm):
-    codigo = forms.CharField(label="Código de Autenticação")
+    codigo = forms.CharField(label="Código de Autenticação",
+        widget=forms.TextInput(attrs={"readonly": "readonly"}),
+        required=True
+    )
 
     class Meta:
         model = Aluno
         fields = ["matricula", "senha", "codigo"]
         widgets = {
-            "senha": forms.PasswordInput()
+            "senha": forms.PasswordInput(),
         }
 
     def clean_codigo(self):
@@ -20,7 +23,7 @@ class AlunoForm(forms.ModelForm):
             raise forms.ValidationError("Código inválido.")
 
         if chave.status:
-            raise forms.ValidationError("Este código já foi usado.")
+            raise forms.ValidationError("Este código expirou.")
 
         return codigo
 
