@@ -5,7 +5,7 @@ from .views import (gerar_chave,mostrar_qr,expirar_chave,registrar_aluno)
 
 urlpatterns = [
     #path("", IndexView.as_view(), name="index"),
-    path("professor/", ProfessorCreate.as_view(), name="professor"),
+    path("professor/login", ProfessorCreate.as_view(), name="professor-login"),
     path("professor/listar/disciplina", DisciplinaList.as_view(), name="listar-disciplina"),
     path("professor/listar/diario", DiarioList.as_view(), name="listar-diario"),
     path("professor/listar/aula", AulaList.as_view(), name="listar-aula"),

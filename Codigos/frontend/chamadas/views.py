@@ -5,7 +5,6 @@ from django.utils import timezone
 from django.urls import reverse_lazy
 from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada
 from .forms import AlunoForm, ProfessorForm
-import io, qrcode
 from datetime import timedelta
 from django.http import HttpResponse, HttpResponseForbidden
 from django.views.decorators.csrf import csrf_exempt

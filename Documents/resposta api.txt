@@ -1,0 +1,312 @@
+{
+"id": 152277,
+"ano_letivo": 73,
+"periodo_letivo": 2,
+"componente_curricular": "TEC.0164 - Seminário de Orientação de Projeto Integrador (Curso 405) - Graduação [30 h/40 Aulas] ",
+"professores": [
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/rh/pessoafisica/ebc283d0-07c3-4bb4-a6e3-ee3bdf80a2c7/foto/75x100/&quot;,
+"nome": "Rezembrim de Paula Soares",
+"matricula": "1092315",
+"email": "rezembrim.paula@ifrn.edu.br"
+}
+],
+"locais_de_aula": [
+"Laboratório 05 - DIATINF - Informática (CNAT)"
+],
+"data_inicio": "2025-09-09",
+"data_fim": "2026-02-10",
+"participantes": [
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/3f5dba64-793e-4465-a04e-c99cac4b97ed/foto/75x100/&quot;,
+"nome": "Álvaro Augusto Pinheiro de Alcântara",
+"matricula": "20241014050036",
+"email": "alvaro.augusto@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/3f33b7b3-bccf-426f-9acc-a2f6ff7b4706/foto/75x100/&quot;,
+"nome": "Aristeu Dantas da Costa Júnior",
+"matricula": "20211014050021",
+"email": "aristeu.j@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/f07816e1-6b7c-4467-9d3b-4e05db09ac66/foto/75x100/&quot;,
+"nome": "ARNALDO VILELA DE LIMA JUNIOR",
+"matricula": "20241014050021",
+"email": "arnaldo.vilela@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/2e209673-f72a-43a0-aa9a-5d761001238a/foto/75x100/&quot;,
+"nome": "Ian Guilherme Duarte da Silva",
+"matricula": "20232014050004",
+"email": "guilherme.ian@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/a56fef42-95ad-4112-aab6-c9a54f16f201/foto/75x100/&quot;,
+"nome": "Jairo bezerra de araujo filho",
+"matricula": "20241014050017",
+"email": "jairo.filho@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/6447026d-e91d-45fb-bb5b-033291662b5a/foto/75x100/&quot;,
+"nome": "JESSICA CAROLINE DA SILVA",
+"matricula": "20221014050041",
+"email": "caroline.silva@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/04e0e9a1-70f8-4119-ad1a-f38d1525fccb/foto/75x100/&quot;,
+"nome": "JOÃO VICTOR GOMES DA SILVA",
+"matricula": "20221014050011",
+"email": "joao.gomes2@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/06b17e24-4adb-4756-b7ef-53918801c032/foto/75x100/&quot;,
+"nome": "Jordan júlio francelino da silva",
+"matricula": "20241014050014",
+"email": "jordan.julio@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/b0c01598-e0a0-41fa-8ab4-0d4c4b636434/foto/75x100/&quot;,
+"nome": "Kaio Leoni Pereira Guimaraes",
+"matricula": "20191014050015",
+"email": "k.leoni@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/d8d005c3-ace1-414d-9867-6854645fd2e5/foto/75x100/&quot;,
+"nome": "MATHEUS DA SILVA MENDES",
+"matricula": "20231014050039",
+"email": "mendes.matheus@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/7e96ebdb-263e-4a5d-bc28-66034a7dfa86/foto/75x100/&quot;,
+"nome": "MATHEUS FELIPE RODRIGUES COSTA",
+"matricula": "20241014050015",
+"email": "rodrigues.felipe1@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/110a0f6b-e5fd-49bb-a28c-74b84473ca5d/foto/75x100/&quot;,
+"nome": "OLIVER RIBEIRO CALAZANS JERONIMO",
+"matricula": "20222014050022",
+"email": "oliver.calazans@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/ace6aaaa-9b10-476e-bec8-4de17854f6e5/foto/75x100/&quot;,
+"nome": "Osmar Vieira da Silva",
+"matricula": "20201014050015",
+"email": "osmar.vieira@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/57e1d1b6-7fd6-44da-8a7b-00522f54f9f9/foto/75x100/&quot;,
+"nome": "Pedro Abílio Pereira Arcoverde",
+"matricula": "20222014050005",
+"email": "pedro.arcoverde@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/546fed74-77f0-42d3-b40a-93746ef12a18/foto/75x100/&quot;,
+"nome": "Pedro Jordan Cassiano Costa",
+"matricula": "20221014050034",
+"email": "pedro.jordan@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/8cf2ed0e-0bae-4380-b40c-a5573fd6fbe1/foto/75x100/&quot;,
+"nome": "Regigleydson kevlen costa lima",
+"matricula": "20241014050018",
+"email": "regigleydson.lima@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/a8d3f6f9-a932-4fad-9ff3-ccb29fc01059/foto/75x100/&quot;,
+"nome": "Tamires Angélica da Silva Bezerra",
+"matricula": "20221014050033",
+"email": "tamires.bezerra@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/d55ca7da-f65a-4f25-9391-bcab496cf8e8/foto/75x100/&quot;,
+"nome": "Thayna Bittencourt Baima",
+"matricula": "20241014050030",
+"email": "thayna.baima@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/5b080d69-1b66-4b2b-8260-4a4fa0cfbb1d/foto/75x100/&quot;,
+"nome": "Victor Matheus Machado Silva",
+"matricula": "20231014050020",
+"email": "v.machado@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/ff789043-8464-4f74-8820-c4edf2308346/foto/75x100/&quot;,
+"nome": "Wellton Gabriel da Silva Souza",
+"matricula": "20231014050029",
+"email": "wellton.gabriel@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/8b82214a-bc34-43d1-89ce-39ee698aec06/foto/75x100/&quot;,
+"nome": "Werllison Lopes Galvão",
+"matricula": "20201014050041",
+"email": "werllison.galvao@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/cde273af-2ab1-4070-8edd-e95b4067f978/foto/75x100/&quot;,
+"nome": "WILLIAM SANTANNA DE ARAUJO",
+"matricula": "20231014050018",
+"email": "w.santanna@academico.ifrn.edu.br"
+},
+{
+"foto": "https://suap.ifrn.edu.br/djtools/arquivo/edu/aluno/63b8b8f4-6b48-470a-b3e5-234872fb6f13/foto/75x100/&quot;,
+"nome": "Yan Ferreira Maia",
+"matricula": "20241014050005",
+"email": "yan.maia@academico.ifrn.edu.br"
+}
+],
+"aulas": [
+{
+"data": "2026-02-06",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Aula"
+},
+{
+"data": "2026-01-31",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Sábado letivo"
+},
+{
+"data": "2026-01-30",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Apresentação dos projetos"
+},
+{
+"data": "2026-01-23",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação final dos projetos"
+},
+{
+"data": "2025-12-19",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-12-12",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-12-05",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-11-29",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Sábado letivo"
+},
+{
+"data": "2025-11-28",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-11-14",
+"etapa": 2,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-11-07",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-10-31",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-10-25",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Sábado letivo"
+},
+{
+"data": "2025-10-24",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-10-17",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação dos projetos"
+},
+{
+"data": "2025-10-11",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Sábado letivo"
+},
+{
+"data": "2025-10-10",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Orientação inicial"
+},
+{
+"data": "2025-09-26",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Definição efetiva dos temas."
+},
+{
+"data": "2025-09-19",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Diálogo sobre definição de temas dos projetos."
+},
+{
+"data": "2025-09-12",
+"etapa": 1,
+"quantidade": 2,
+"professor": "Rezembrim de Paula Soares",
+"conteudo": "Discussão inicial."
+}
+],
+"materiais_de_aula": [],
+"horarios": [
+{
+"dia": "Sexta",
+"horario": "16:30 - 17:15"
+},
+{
+"dia": "Sexta",
+"horario": "17:15 - 18:00"
+}
+]
+},

@@ -14,44 +14,44 @@ class Professor(models.Model):
     
 class Disciplina(models.Model):
     id = models.AutoField(primary_key=True)
-    nome = models.CharField(max_length=150)
     sigla = models.CharField(max_length=20)
-    curso = models.CharField(max_length=150)
+    nome = models.CharField(max_length=150)
 
     def __str__(self):
-        return f"{self.nome} | {self.sigla}"
+        return f"{self.sigla} | {self.nome}"
 
 class Diario(models.Model):
-    TURNOS = (('M', 'Matutino'),('V', 'Vespertino'),('N', 'Noturno'))
-
     id = models.AutoField(primary_key=True)
-    turno = models.CharField(max_length=30, choices=TURNOS)
 
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professor = models.ForeignKey(Professor, blank=True, null=True, on_delete=models.PROTECT)
     
     def __str__(self):
-        return f"{self.professor} | {self.turno} | {self.disciplina}"
+        return f"{self.disciplina} | {self.professor}"
     
 class Horario(models.Model):
+    DIA = (('Domingo','Domingo'),('Segunda','Segunda'),('Terça','Terça'),('Quarta','Quarta'),('Quinta','Quinta'),('Sexta','Sexta'),('Sábado','Sábado'))
+
     id = models.AutoField(primary_key=True)
+    dia = models.CharField(max_length=7, choices=DIA)
     horaInicio = models.TimeField()
     horaFim = models.TimeField()
 
     def __str__(self):
-        return f"{self.horaInicio.strftime('%H:%M')} | {self.horaFim.strftime('%H:%M')}"
+        return f"{self.dia} | {self.horaInicio.strftime('%H:%M')} | {self.horaFim.strftime('%H:%M')}"
     
 class Aula(models.Model):
     id = models.AutoField(primary_key=True)
     data = models.DateField()
-    numAula = models.IntegerField()
+    etapa = models.IntegerField()
+    quantidade = models.IntegerField()
     conteudo = models.TextField(blank=True, null=True)
     
     diario = models.ForeignKey(Diario, on_delete=models.CASCADE)
     horario = models.ForeignKey(Horario, on_delete=models.PROTECT)
 
     def __str__(self):
-        return f"{self.numAula} | {self.diario.disciplina.nome} | {self.data.strftime('%d/%m/%Y')}"
+        return f"{self.quantidade} | {self.data.strftime('%d/%m/%Y')} | {self.conteudo}"
     
 
 # Bloco inferior até chamada
@@ -80,11 +80,16 @@ class Chamada(models.Model):
     id = models.AutoField(primary_key=True)
     horaEntrada = models.DateTimeField(null=True, blank=True)
     horaSaida = models.DateTimeField(null=True, blank=True)
-    presencas = models.IntegerField(default=0)
-    
+    faltas = models.IntegerField(null=True, blank=True)
+
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
     chave = models.ForeignKey(Chave, on_delete=models.PROTECT)
+
+    def save(self, *args, **kwargs):
+        if self.faltas is None:
+            self.faltas = self.aula.quantidade
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida} | {self.presencas}"
