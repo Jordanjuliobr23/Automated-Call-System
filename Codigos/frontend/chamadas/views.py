@@ -3,13 +3,16 @@ from django.views.generic.list import ListView
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.urls import reverse_lazy
-from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada
-from .forms import AlunoForm, ProfessorForm
-from datetime import timedelta
-from django.http import HttpResponse, HttpResponseForbidden
+from django.db import transaction
+from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from .funcoes import qr_image
+from datetime import timedelta
+import hashlib
 
+from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada, Horario
+from .forms import AlunoForm, ProfessorForm
+from .funcoes import qr_image
+from .suap import autenticar_suap, buscar_diarios
 
 # 1. O professor clica no botão e gera a chave
 def gerar_chave(request, aula_id):
@@ -82,11 +85,109 @@ def registrar_aluno(request, codigo):
         "codigo": chave.codigo,
     })
 
-class ProfessorCreate(CreateView):
-    model = Professor
-    form_class = ProfessorForm
-    template_name = 'paginas/formProfessor.html'
-    success_url = reverse_lazy("index")
+def registrar_professor(request):
+    if request.method == "POST":
+        form = ProfessorForm(request.POST)
+
+        if form.is_valid():
+            matricula = form.cleaned_data["matricula"]
+            senha = form.cleaned_data["senha"]
+
+            token = autenticar_suap(matricula, senha)
+
+            if not token:
+                form.add_error(None, "Matrícula ou senha inválidas.")
+                return render(request, "paginas/formProfessor.html", {"form": form})
+
+            diarios_api = buscar_diarios(token)
+
+            if not diarios_api:
+                form.add_error(None, "Erro ao buscar diários no SUAP.")
+                return render(request, "paginas/formProfessor.html", {"form": form})
+
+            with transaction.atomic():
+                for d in diarios_api:
+                    componente_curricular = d["componente_curricular"].split(' - ')
+                    disciplina, _ = Disciplina.objects.get_or_create(
+                        id = str(int(d["id"])+1),
+                        defaults={
+                            "sigla": componente_curricular[0],
+                            "nome": componente_curricular[1]}
+                    )
+                        
+                    professor_diario = None
+                    for p in d["professores"]:
+                        hash = hashlib.sha256(senha.encode()).hexdigest() if matricula == p["matricula"] else ""
+
+                        professor, _ = Professor.objects.get_or_create(
+                            matricula=p["matricula"],
+                            defaults={
+                                "nome": p["nome"],
+                                "senha": hash
+                            }
+                        )
+
+                        if matricula == p["matricula"]:
+                            professor_diario = professor
+
+                    professor_diario = None
+                    for p in d["professores"]:
+                        if matricula == p["matricula"]:
+                            professor, _ = Professor.objects.get_or_create(
+                                matricula=p["matricula"],
+                                defaults={
+                                    "nome": p["nome"],
+                                    "senha": hashlib.sha256(senha.encode()).hexdigest()
+                                }
+                            )
+                            professor_diario = professor
+                        else:
+                            Professor.objects.get_or_create(
+                                matricula=p["matricula"],
+                                defaults={
+                                    "nome": p["nome"]
+                                }
+                            )
+
+                    for alu in d["participantes"]:
+                        aluno, _ = Aluno.objects.get_or_create(
+                            matricula = alu["matricula"],
+                            defaults={
+                                "nome": alu["nome"]
+                            }
+                        )
+
+                    diario, _ = Diario.objects.get_or_create(
+                        id = d["id"],
+                        defaults={
+                        "disciplina": disciplina,
+                        "professor": professor_diario}
+                    )
+                    
+                    for h in d["horarios"]:
+                        horario, _ = Horario.objects.get_or_create(
+                            dia=h["dia"],
+                            horario=h["horario"]
+                        )
+
+                    for a in d["aulas"]:
+                        aula, _ = Aula.objects.get_or_create(
+                            data=a["data"],
+                            etapa=a["etapa"],
+                            diario=diario,
+                            defaults={
+                                "quantidade": a["quantidade"],
+                                "conteudo": a["conteudo"],
+                                "professor": professor_diario
+                            }
+                        )
+
+            return redirect("index")
+
+    else:
+        form = ProfessorForm()
+
+    return render(request, "paginas/formProfessor.html", {"form": form})
 
 class DisciplinaList(ListView):
     model = Disciplina

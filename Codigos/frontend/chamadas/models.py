@@ -34,11 +34,10 @@ class Horario(models.Model):
 
     id = models.AutoField(primary_key=True)
     dia = models.CharField(max_length=7, choices=DIA)
-    horaInicio = models.TimeField()
-    horaFim = models.TimeField()
+    horario = models.CharField(max_length=13)
 
     def __str__(self):
-        return f"{self.dia} | {self.horaInicio.strftime('%H:%M')} | {self.horaFim.strftime('%H:%M')}"
+        return f"{self.dia} | {self.horario}"
     
 class Aula(models.Model):
     id = models.AutoField(primary_key=True)
@@ -48,7 +47,7 @@ class Aula(models.Model):
     conteudo = models.TextField(blank=True, null=True)
     
     diario = models.ForeignKey(Diario, on_delete=models.CASCADE)
-    horario = models.ForeignKey(Horario, on_delete=models.PROTECT)
+    professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
     def __str__(self):
         return f"{self.quantidade} | {self.data.strftime('%d/%m/%Y')} | {self.conteudo}"
@@ -92,4 +91,4 @@ class Chamada(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida} | {self.presencas}"
+        return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida}"

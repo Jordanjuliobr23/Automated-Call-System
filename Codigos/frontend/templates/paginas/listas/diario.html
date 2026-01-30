@@ -7,15 +7,13 @@
 <div class="table-responsive">
     <table class="table table-striped">
         <tr>
-            <th>Turno</th>
             <th>Disciplina</th>
-            <th>Professor</th>
+            <th>Professores</th>
             <th>Opções</th>
         </tr>
 
         {% for diario in object_list %}
         <tr>
-            <td>{{ diario.turno }}</td>
             <td>{{ diario.disciplina }}</td>
             <td>{{ diario.professor }}</td>
         </tr>    

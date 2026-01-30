@@ -1,11 +1,11 @@
 from django.urls import path
-from .views import registrar_aluno, ProfessorCreate
+from .views import registrar_aluno, registrar_professor
 from .views import DisciplinaList, DiarioList, AulaList, AlunoList, ChamadaList
 from .views import (gerar_chave,mostrar_qr,expirar_chave,registrar_aluno)
 
 urlpatterns = [
     #path("", IndexView.as_view(), name="index"),
-    path("professor/login", ProfessorCreate.as_view(), name="professor-login"),
+    path("professor/login", registrar_professor, name="professor-login"),
     path("professor/listar/disciplina", DisciplinaList.as_view(), name="listar-disciplina"),
     path("professor/listar/diario", DiarioList.as_view(), name="listar-diario"),
     path("professor/listar/aula", AulaList.as_view(), name="listar-aula"),

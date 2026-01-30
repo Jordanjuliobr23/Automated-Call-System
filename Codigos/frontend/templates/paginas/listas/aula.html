@@ -8,18 +8,19 @@
     <table class="table table-striped">
         <tr>
             <th>Data</th>
+            <th>Etapa</th>
             <th>Número de Aulas</th>
             <th>Conteúdo</th>
-            <th>Horário</th>
             <th>Opções</th>
         </tr>
 
         {% for aula in object_list %}
         <tr>
             <td>{{ aula.data }}</td>
-            <td>{{ aula.numAula }}</td>
+            <td>{{ aula.etapa }}</td>
+            <td>{{ aula.quantidade }}</td>
             <td>{{ aula.conteudo }}</td>
-            <td>{{ aula.horario }}</td>
+            <td></td>
         </tr>    
         {% empty %}
         <tr>
