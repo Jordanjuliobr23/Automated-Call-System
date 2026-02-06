@@ -6,10 +6,10 @@ from django.urls import reverse_lazy
 from django.db import transaction
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
-from datetime import timedelta
+from datetime import timedelta, datetime
 import hashlib
 
-from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada, Horario
+from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada, Horario, ProfessorDiario, AlunoDiario
 from .forms import AlunoForm, ProfessorForm
 from .funcoes import qr_image
 from .suap import autenticar_suap, buscar_diarios
@@ -114,23 +114,20 @@ def registrar_professor(request):
                             "sigla": componente_curricular[0],
                             "nome": componente_curricular[1]}
                     )
-                        
-                    professor_diario = None
-                    for p in d["professores"]:
-                        hash = hashlib.sha256(senha.encode()).hexdigest() if matricula == p["matricula"] else ""
+                    
+                    diario, _ = Diario.objects.get_or_create(
+                        id = d["id"],
+                        defaults={
+                        "disciplina": disciplina,
+                        }
+                    )
 
-                        professor, _ = Professor.objects.get_or_create(
-                            matricula=p["matricula"],
-                            defaults={
-                                "nome": p["nome"],
-                                "senha": hash
-                            }
+                    for h in d["horarios"]:
+                        horario, _ = Horario.objects.get_or_create(
+                            dia=h["dia"],
+                            horario=h["horario"]
                         )
 
-                        if matricula == p["matricula"]:
-                            professor_diario = professor
-
-                    professor_diario = None
                     for p in d["professores"]:
                         if matricula == p["matricula"]:
                             professor, _ = Professor.objects.get_or_create(
@@ -140,14 +137,17 @@ def registrar_professor(request):
                                     "senha": hashlib.sha256(senha.encode()).hexdigest()
                                 }
                             )
-                            professor_diario = professor
                         else:
-                            Professor.objects.get_or_create(
+                            professor, _ = Professor.objects.get_or_create(
                                 matricula=p["matricula"],
                                 defaults={
                                     "nome": p["nome"]
                                 }
                             )
+                        ProfessorDiario.objects.get_or_create(
+                            professor=professor,
+                            diario=diario
+                        )   
 
                     for alu in d["participantes"]:
                         aluno, _ = Aluno.objects.get_or_create(
@@ -155,30 +155,27 @@ def registrar_professor(request):
                             defaults={
                                 "nome": alu["nome"]
                             }
-                        )
-
-                    diario, _ = Diario.objects.get_or_create(
-                        id = d["id"],
-                        defaults={
-                        "disciplina": disciplina,
-                        "professor": professor_diario}
-                    )
-                    
-                    for h in d["horarios"]:
-                        horario, _ = Horario.objects.get_or_create(
-                            dia=h["dia"],
-                            horario=h["horario"]
+                        )    
+                        AlunoDiario.objects.get_or_create(
+                            aluno=aluno,
+                            diario=diario
                         )
 
                     for a in d["aulas"]:
+                        data_aula = datetime.strptime(a["data"], "%Y-%m-%d").date()
+                        professor_aula = (
+                            Professor.objects.filter(
+                                nome=a["professor"], 
+                                professordiario__diario=diario).first()
+                        )
                         aula, _ = Aula.objects.get_or_create(
-                            data=a["data"],
+                            data=data_aula,
                             etapa=a["etapa"],
                             diario=diario,
                             defaults={
                                 "quantidade": a["quantidade"],
                                 "conteudo": a["conteudo"],
-                                "professor": professor_diario
+                                "professor": professor_aula
                             }
                         )
 

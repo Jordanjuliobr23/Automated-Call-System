@@ -5,7 +5,15 @@ import secrets
 # Bloco Superior até Chamada
 
 class Professor(models.Model):
-    matricula = models.CharField(max_length=14, verbose_name="Matrícula", unique=True, primary_key=True)
+    matricula = models.CharField(max_length=14, verbose_name="matrícula", unique=True, primary_key=True)
+    nome = models.CharField(max_length=150)
+    senha = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f"{self.nome} | {self.matricula}"
+    
+class Aluno(models.Model):
+    matricula = models.CharField(max_length=14, verbose_name="matrícula", unique=True, primary_key=True)
     nome = models.CharField(max_length=150)
     senha = models.CharField(max_length=128)
 
@@ -24,10 +32,31 @@ class Diario(models.Model):
     id = models.AutoField(primary_key=True)
 
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
-    professor = models.ForeignKey(Professor, blank=True, null=True, on_delete=models.PROTECT)
+    professores = models.ManyToManyField(Professor,through="ProfessorDiario")
+    alunos = models.ManyToManyField(Aluno,through="AlunoDiario")
     
     def __str__(self):
-        return f"{self.disciplina} | {self.professor}"
+        return f"{self.disciplina}"
+    
+class ProfessorDiario(models.Model):
+    professor = models.ForeignKey(Professor, on_delete=models.CASCADE)
+    diario = models.ForeignKey(Diario, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("professor", "diario")
+
+    def __str__(self):
+        return f"{self.professor} | {self.diario}"
+
+class AlunoDiario(models.Model):
+    aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
+    diario = models.ForeignKey(Diario, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("aluno", "diario")
+
+    def __str__(self):
+        return f"{self.aluno} | {self.diario}"
     
 class Horario(models.Model):
     DIA = (('Domingo','Domingo'),('Segunda','Segunda'),('Terça','Terça'),('Quarta','Quarta'),('Quinta','Quinta'),('Sexta','Sexta'),('Sábado','Sábado'))
@@ -65,14 +94,6 @@ class Chave(models.Model):
     def __str__(self):
         return f"{self.codigo} | {'Expirada' if self.status else 'Ativa'} | {self.aula}"
     
-class Aluno(models.Model):
-    matricula = models.CharField(max_length=14, primary_key=True, unique=True, verbose_name="Matrícula")
-    nome = models.CharField(max_length=150)
-    senha = models.CharField(max_length=128)
-
-    def __str__(self):
-        return f"{self.nome} | {self.matricula}"
-
 #Chamada (classe principal)
 
 class Chamada(models.Model):
