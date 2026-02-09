@@ -21,6 +21,8 @@ services:
       - POSTGRES_PASSWORD=postgres
     ports:
       - "5432:5432"
+    networks:
+      - qr_network
     restart: unless-stopped
 
   frontend:
@@ -40,6 +42,8 @@ services:
       - DB_PORT=5432
     depends_on:
       - db
+    networks:
+      - qr_network
     restart: unless-stopped
 
 volumes:
