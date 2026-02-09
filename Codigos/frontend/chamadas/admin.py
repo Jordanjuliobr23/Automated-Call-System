@@ -1,11 +1,11 @@
 from django.contrib import admin
-from .models import Professor, Disciplina, Diario, Horario, Aula, Aluno, Chave, Chamada, ProfessorDiario, AlunoDiario
+from .models import Professor, Disciplina, Diario, Horario, Aula, Aluno, Chave, Chamada, ProfessorDiario, AlunoDiario, DiarioHorario
 
 # Register your models here.
 
 admin.site.register(Disciplina)
-admin.site.register(Horario)
 admin.site.register(Aula)
+admin.site.register(Horario)
 admin.site.register(Chave)
 admin.site.register(Chamada)
 
@@ -25,6 +25,12 @@ class AlunoAdmin(admin.ModelAdmin):
     list_display = ("matricula", "nome")
     inlines = [AlunoDiarioInline]
 
+class DiarioHorarioInline(admin.TabularInline):
+    model = DiarioHorario
+    extra = 1
 @admin.register(Diario)
 class DiarioAdmin(admin.ModelAdmin):
     list_display = ("id", "disciplina")
+    inlines = [DiarioHorarioInline]
+
+

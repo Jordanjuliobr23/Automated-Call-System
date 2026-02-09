@@ -9,7 +9,7 @@ from django.views.decorators.csrf import csrf_exempt
 from datetime import timedelta, datetime
 import hashlib
 
-from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada, Horario, ProfessorDiario, AlunoDiario
+from .models import Professor, Chave, Disciplina, Diario, Aula, Aluno, Chamada, Horario, ProfessorDiario, AlunoDiario, DiarioHorario
 from .forms import AlunoForm, ProfessorForm
 from .funcoes import qr_image
 from .suap import autenticar_suap, buscar_diarios
@@ -112,13 +112,15 @@ def registrar_professor(request):
                         id = str(int(d["id"])+1),
                         defaults={
                             "sigla": componente_curricular[0],
-                            "nome": componente_curricular[1]}
+                            "nome": componente_curricular[1],
+                            "nivel": componente_curricular[2]}
                     )
                     
                     diario, _ = Diario.objects.get_or_create(
                         id = d["id"],
                         defaults={
                         "disciplina": disciplina,
+                        "local": d["locais_de_aula"][0]
                         }
                     )
 
@@ -126,6 +128,10 @@ def registrar_professor(request):
                         horario, _ = Horario.objects.get_or_create(
                             dia=h["dia"],
                             horario=h["horario"]
+                        )
+                        DiarioHorario.objects.get_or_create(
+                            diario=diario,
+                            horario=horario
                         )
 
                     for p in d["professores"]:

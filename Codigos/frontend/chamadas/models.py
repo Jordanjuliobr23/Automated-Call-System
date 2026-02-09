@@ -10,7 +10,7 @@ class Professor(models.Model):
     senha = models.CharField(max_length=128)
 
     def __str__(self):
-        return f"{self.nome} | {self.matricula}"
+        return f"{self.nome} - {self.matricula}"
     
 class Aluno(models.Model):
     matricula = models.CharField(max_length=14, verbose_name="matrícula", unique=True, primary_key=True)
@@ -18,19 +18,21 @@ class Aluno(models.Model):
     senha = models.CharField(max_length=128)
 
     def __str__(self):
-        return f"{self.nome} | {self.matricula}"
+        return f"{self.nome} - {self.matricula}"
     
 class Disciplina(models.Model):
     id = models.AutoField(primary_key=True)
     sigla = models.CharField(max_length=20)
     nome = models.CharField(max_length=150)
+    nivel = models.CharField(max_length=150)
 
     def __str__(self):
-        return f"{self.sigla} | {self.nome}"
+        return f"{self.sigla} - {self.nome} - {self.nivel}"
 
 class Diario(models.Model):
     id = models.AutoField(primary_key=True)
 
+    local = models.CharField(max_length=150)
     disciplina = models.ForeignKey(Disciplina, on_delete=models.CASCADE)
     professores = models.ManyToManyField(Professor,through="ProfessorDiario")
     alunos = models.ManyToManyField(Aluno,through="AlunoDiario")
@@ -46,7 +48,7 @@ class ProfessorDiario(models.Model):
         unique_together = ("professor", "diario")
 
     def __str__(self):
-        return f"{self.professor} | {self.diario}"
+        return f"{self.professor} - {self.diario}"
 
 class AlunoDiario(models.Model):
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
@@ -56,7 +58,7 @@ class AlunoDiario(models.Model):
         unique_together = ("aluno", "diario")
 
     def __str__(self):
-        return f"{self.aluno} | {self.diario}"
+        return f"{self.aluno} - {self.diario}"
     
 class Horario(models.Model):
     DIA = (('Domingo','Domingo'),('Segunda','Segunda'),('Terça','Terça'),('Quarta','Quarta'),('Quinta','Quinta'),('Sexta','Sexta'),('Sábado','Sábado'))
@@ -64,9 +66,20 @@ class Horario(models.Model):
     id = models.AutoField(primary_key=True)
     dia = models.CharField(max_length=7, choices=DIA)
     horario = models.CharField(max_length=13)
+    diario = models.ManyToManyField(Diario,through="DiarioHorario")
 
     def __str__(self):
-        return f"{self.dia} | {self.horario}"
+        return f"{self.dia} - {self.horario}"
+    
+class DiarioHorario(models.Model):
+    diario = models.ForeignKey(Diario, on_delete=models.CASCADE)
+    horario = models.ForeignKey(Horario, on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ("diario","horario")
+
+    def __str__(self):
+        return f"{self.diario} - {self.horario}"
     
 class Aula(models.Model):
     id = models.AutoField(primary_key=True)
@@ -79,7 +92,7 @@ class Aula(models.Model):
     professor = models.ForeignKey(Professor, on_delete=models.PROTECT)
 
     def __str__(self):
-        return f"{self.quantidade} | {self.data.strftime('%d/%m/%Y')} | {self.conteudo}"
+        return f"{self.quantidade} - {self.data.strftime('%d/%m/%Y')} - {self.conteudo}"
     
 
 # Bloco inferior até chamada
@@ -92,7 +105,7 @@ class Chave(models.Model):
     aula = models.ForeignKey(Aula, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.codigo} | {'Expirada' if self.status else 'Ativa'} | {self.aula}"
+        return f"{self.codigo} - {'Expirada' if self.status else 'Ativa'} - {self.aula}"
     
 #Chamada (classe principal)
 
@@ -112,4 +125,4 @@ class Chamada(models.Model):
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f"{self.aluno} | {self.aula} | {self.horaEntrada} | {self.horaSaida}"
+        return f"{self.aluno} - {self.aula} - {self.horaEntrada} - {self.horaSaida}"

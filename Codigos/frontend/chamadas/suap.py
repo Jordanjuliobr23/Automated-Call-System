@@ -1,9 +1,9 @@
 import requests
 
-#BASE_URL = "https://treinamento.suapdevs.ifrn.edu.br/api"
-BASE_URL = "https://suap.ifrn.edu.br/api"
-#DIARIO = "2024/1"
-DIARIO = "2025/2"
+BASE_URL = "https://treinamento.suapdevs.ifrn.edu.br/api"
+#BASE_URL = "https://suap.ifrn.edu.br/api"
+DIARIO = "2024/1"
+#DIARIO = "2025/2"
 
 def autenticar_suap(matricula, senha):
     response = requests.post(
@@ -27,6 +27,7 @@ def buscar_diarios(token):
 
     response = requests.get(
         f"{BASE_URL}/ensino/meus-diarios/{DIARIO}/",
+        #f"{BASE_URL}/ensino/meus-diarios/", #pegar apenas os diarios abertos
         headers=headers,
         timeout=10
     )

@@ -16,3 +16,13 @@
   border-radius: 90px;
   width: 65px;
 }
+
+.text-azul {
+  color: #155795; /* azul marinho */
+}
+
+.btn-diario {
+    background-color: #e0e0e0;
+    border-color: #d6d6d6;
+    color: #212529;
+}
