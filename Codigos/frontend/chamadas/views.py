@@ -185,7 +185,7 @@ def registrar_professor(request):
                             }
                         )
 
-            return redirect("index")
+            return redirect("listar-diario")
 
     else:
         form = ProfessorForm()
