@@ -2,18 +2,36 @@
 {% load static %}
 
 {% block conteudo %}
+<div class="container">
+    <div class="row justify-content-center align-items-center" style="min-height: 70vh;">
+        <div class="col-md-6 col-lg-5">
 
-<h3>Registro de Frequência</h3>
-<p>Utilize matrícula e senha do SUAP</p>
-<hr>
+            <div class="card shadow-sm">
+                <div class="card-body p-4">
 
-<form action="" method="POST">
-    {% csrf_token %}
+                    <h3 class="fw-bold text-center mb-1">
+                        Registro de Frequência
+                    </h3>
 
-    {{ form.as_p }}
+                    <p class="text-muted text-center mb-4">
+                        Utilize a matrícula e senha do SUAP
+                    </p>
+
+                    <form action="" method="POST">
+                        {% csrf_token %}
+
+                        {{ form.as_p }}
 
 
-    <button type="submit" class="btn btn-outline-success mt-3">Enviar</button>
-</form>
+                        <button type="submit" class="btn btn-outline-success mt-3">Enviar</button>
+                    </form>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

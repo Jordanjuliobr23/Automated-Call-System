@@ -3,7 +3,7 @@ from .models import Aluno, Chave, Professor
 
 class AlunoForm(forms.ModelForm):
     codigo = forms.CharField(label="Código de Autenticação",
-        widget=forms.TextInput(attrs={"readonly": "readonly"}),
+        widget=forms.TextInput(attrs={"readonly": "readonly","class": "form-control"}),
         required=True
     )
 
@@ -11,7 +11,9 @@ class AlunoForm(forms.ModelForm):
         model = Aluno
         fields = ["matricula", "senha", "codigo"]
         widgets = {
-            "senha": forms.PasswordInput(),
+            "matricula": forms.TextInput(attrs={"class": "form-control"}),
+            "senha": forms.PasswordInput(attrs={"class": "form-control"}),
+            
         }
 
     def clean_codigo(self):
@@ -32,5 +34,6 @@ class ProfessorForm(forms.ModelForm):
         model = Professor
         fields = ["matricula", "senha"]
         widgets = {
-            "senha": forms.PasswordInput()
+            "matricula": forms.TextInput(attrs={"class": "form-control"}),
+            "senha": forms.PasswordInput(attrs={"class": "form-control"}),
         }

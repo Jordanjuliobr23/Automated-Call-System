@@ -37,6 +37,12 @@
                         <span class="badge bg-secondary">
                             {{ aula.quantidade }} aulas
                         </span>
+                        
+                        <a href="{% url 'listar-chamadas' aula.id %}"
+                        class="btn btn-outline-secondary btn-sm">
+                            <i class="fa-solid fa-search-plus me-1"></i>
+                            Visualizar Chamada
+                        </a>
 
                         <a href="{% url 'gerar_chave' aula.id %}"
                         class="btn btn-success btn-sm">

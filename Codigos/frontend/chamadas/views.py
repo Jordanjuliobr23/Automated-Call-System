@@ -99,13 +99,13 @@ def professor_login(request):
 
             if not token:
                 form.add_error(None, "Matrícula ou senha inválidas.")
-                return render(request, "paginas/formProfessor.html", {"form": form})
+                return render(request, "paginas/index.html", {"form": form})
 
             diarios_api = buscar_diarios(token)
 
             if not diarios_api:
                 form.add_error(None, "Erro ao buscar diários no SUAP.")
-                return render(request, "paginas/formProfessor.html", {"form": form})
+                return render(request, "paginas/index.html", {"form": form})
             
             hash_senha = hashlib.sha256(senha.encode()).hexdigest()
 
@@ -116,7 +116,7 @@ def professor_login(request):
 
             if not nome:
                 form.add_error(None, "Professor não encontrado nos diários do SUAP.")
-                return render(request, "paginas/formProfessor.html", {"form": form})
+                return render(request, "paginas/index.html", {"form": form})
 
             professor_logado, _ = Professor.objects.update_or_create(
                 matricula=matricula,
@@ -205,7 +205,7 @@ def professor_login(request):
     else:
         form = ProfessorForm()
 
-    return render(request, "paginas/formProfessor.html", {"form": form})
+    return render(request, "paginas/index.html", {"form": form})
 
 
 class DiarioList(ListView):

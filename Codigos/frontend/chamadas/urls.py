@@ -5,11 +5,11 @@ from .views import (gerar_chave,mostrar_qr,expirar_chave,registrar_aluno)
 
 urlpatterns = [
     #path("", IndexView.as_view(), name="index"),
-    path("professor/login", professor_login, name="professor-login"),
+    path("", professor_login, name="index"),
     path("professor/diarios", DiarioList.as_view(), name="listar-diarios"),
     path("professor/diarios/<int:diario_id>/aulas/", listar_aulas, name="listar-aulas"),
     path("professor/diarios/<int:diario_id>/alunos/", listar_alunos, name="listar-alunos"),
-    path("professor/chamadas", ChamadaList.as_view(), name="listar-chamadas"),
+    path("professor/diarios/<int:diario_id>/aulas/", ChamadaList.as_view(), name="listar-chamadas"),
     
     path("gerar/<int:aula_id>/", gerar_chave, name="gerar_chave"),
     path("qr/<int:aula_id>/<str:codigo>/", mostrar_qr, name="mostrar_qr"),
