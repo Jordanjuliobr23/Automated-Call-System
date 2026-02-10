@@ -37,12 +37,12 @@ def buscar_diarios(token):
 
     return response.json().get("results")
 
-#token = autenticar_suap("1221471", "123456")
+'''token = autenticar_suap("1221471", "123456")
 
-#busca = buscar_diarios(token)
+busca = buscar_diarios(token)
 
-#for d in busca:
-#    for a in d["aulas"]:
-#        print(a)
+for d in busca:
+    for a in d["aulas"]:
+        print(a)
 
-#print(busca)
+print(busca)'''

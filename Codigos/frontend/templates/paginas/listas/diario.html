@@ -1,8 +1,13 @@
 {% extends 'base.html' %} {% load static %}
 
+{% block titulo %}
+        <title>Lista de Diários</title>
+{% endblock titulo %}
+
+
 {% block conteudo %}
 
-<h3>Lista de Diarios registradas</h3>
+<h3>Lista de Diarios registrados</h3>
 <hr>
 
 {% for diario in object_list %}
@@ -13,10 +18,16 @@
         <h5 class="fw-bold mb-0"><a href="#" class="text-decoration-none text-azul">
             {{ diario.disciplina }}
         </a></h5>
-
-        <a href="#" class="btn btn-diario btn-sm d-flex align-items-center gap-2"><i class="fa-solid fa-eye"></i>
-            Acessar Diário
-        </a>
+        
+        <div class="d-flex justify-content-between align-items-start flex-wrap gap-2">
+            <a href="{% url 'listar-alunos' diario.id_suap %}" class="btn btn-diario btn-sm d-flex align-items-center gap-2"><i class="fa-solid fa-eye"></i>
+                Acessar Alunos
+            </a>
+            <a href="{% url 'listar-aulas' diario.id_suap %}" class="btn btn-diario btn-sm d-flex align-items-center gap-2"><i class="fa-solid fa-eye"></i>
+                Acessar Aulas
+            </a>
+        </div>
+        
     </div>
     <hr class="my-3">
 
@@ -50,7 +61,7 @@
                 <i class="fa-regular fa-clock me-2"></i>
                 Horário:
             </dt>
-            <dd class="ms-4 mb-1">HORARIOS</dd>
+            <dd class="ms-4 mb-1">{{ diario.horario_resumido }}</dd>
         </div>
 
         <!-- Local -->
@@ -70,38 +81,5 @@
 
 {% endfor %}
 
-
-
-
-
-
-
-
-
-
-
-<div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>Disciplina</th>
-            <th>Professores</th>
-            <th>Opções</th>
-        </tr>
-
-        {% for diario in object_list %}
-        <tr>
-            <td>{{ diario.disciplina }}</td>
-            <td>{{ diario.professor }}</td>
-        </tr>    
-        {% empty %}
-        <tr>
-            <td colspan="3">Nenhum diario registrado.</td>
-        </tr>
-        {% endfor %}
-
-
-
-    </table>
-</div>
 
 {% endblock conteudo %}

@@ -1,34 +1,65 @@
 {% extends 'base.html' %} {% load static %}
 
+{% block titulo %}
+        <title>Lista de Aulas</title>
+{% endblock titulo %}
+
 {% block conteudo %}
 
-<h3>Lista de Aulas registradas</h3>
-<hr>
-<div class="table-responsive">
-    <table class="table table-striped">
-        <tr>
-            <th>Data</th>
-            <th>Etapa</th>
-            <th>Número de Aulas</th>
-            <th>Conteúdo</th>
-            <th>Opções</th>
-        </tr>
+<div class="d-flex justify-content-between align-items-center">
+    <h3 class="text-azul fw-bold">
+        {{ diario.disciplina.nome }}
+    </h3>
 
-        {% for aula in object_list %}
-        <tr>
-            <td>{{ aula.data }}</td>
-            <td>{{ aula.etapa }}</td>
-            <td>{{ aula.quantidade }}</td>
-            <td>{{ aula.conteudo }}</td>
-            <td></td>
-        </tr>    
-        {% empty %}
-        <tr>
-            <td colspan="5">Nenhuma aula registrada.</td>
-        </tr>
-        {% endfor %}
-
-    </table>
+    <a href="{% url 'listar-diarios' %}" class="btn btn-outline-secondary">
+        <i class="fa-solid fa-arrow-left me-1"></i>
+        Voltar
+    </a>
 </div>
 
-{% endblock conteudo %}
+<p class="text-muted mb-3">
+    Professores:
+    {% for prof in diario.professores.all %}
+        {{ prof.nome }}{% if not forloop.last %}, {% endif %}
+    {% endfor %}
+</p>
+
+<hr>
+
+{% if aulas %}
+    <div class="list-group">
+        {% for aula in aulas %}
+            <div class="list-group-item">
+                <div class="d-flex justify-content-between align-items-center">
+                    <strong>{{ aula.data|date:"d/m/Y" }}</strong>
+
+                    <div class="d-flex align-items-center gap-2">
+                        <span class="badge bg-secondary">
+                            {{ aula.quantidade }} aulas
+                        </span>
+
+                        <a href="{% url 'gerar_chave' aula.id %}"
+                        class="btn btn-success btn-sm">
+                            <i class="fa-solid fa-qrcode me-1"></i>
+                            Gerar QR Code
+                        </a>
+                    </div>
+                </div>
+
+                <div class="text-muted small">
+                    Etapa: {{ aula.etapa }}
+                </div>
+
+                {% if aula.conteudo %}
+                    <div class="mt-2">
+                        {{ aula.conteudo }}
+                    </div>
+                {% endif %}
+            </div>
+        {% endfor %}
+    </div>
+{% else %}
+    <p class="text-muted">Nenhuma aula cadastrada para este diário.</p>
+{% endif %}
+
+{% endblock %}

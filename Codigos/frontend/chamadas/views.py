@@ -22,11 +22,12 @@ def gerar_chave(request, aula_id):
         aula=aula
     )
 
-    return redirect('mostrar_qr', codigo=chave.codigo)
+    return redirect('mostrar_qr', aula_id=aula_id, codigo=chave.codigo)
 
 
 # 2. View que exibe o QR e inicia o cronômetro
-def mostrar_qr(request, codigo):
+def mostrar_qr(request, aula_id, codigo):
+    aula = get_object_or_404(Aula, id=aula_id)
     chave = get_object_or_404(Chave, codigo=codigo)
 
     agora = timezone.now()
@@ -42,6 +43,7 @@ def mostrar_qr(request, codigo):
         "chave": chave,
         "segundos_restantes": int(segundos_restantes),
         "qr_code": qr_code,
+        "diario": aula.diario,
     })
 
 
@@ -85,7 +87,7 @@ def registrar_aluno(request, codigo):
         "codigo": chave.codigo,
     })
 
-def registrar_professor(request):
+def professor_login(request):
     if request.method == "POST":
         form = ProfessorForm(request.POST)
 
@@ -104,22 +106,42 @@ def registrar_professor(request):
             if not diarios_api:
                 form.add_error(None, "Erro ao buscar diários no SUAP.")
                 return render(request, "paginas/formProfessor.html", {"form": form})
+            
+            hash_senha = hashlib.sha256(senha.encode()).hexdigest()
+
+            for p1 in diarios_api[0]["professores"]:
+                if p1["matricula"] == matricula:
+                    nome = p1["nome"]
+                    break
+
+            if not nome:
+                form.add_error(None, "Professor não encontrado nos diários do SUAP.")
+                return render(request, "paginas/formProfessor.html", {"form": form})
+
+            professor_logado, _ = Professor.objects.update_or_create(
+                matricula=matricula,
+                defaults={
+                    "nome": nome,
+                    "senha": hash_senha
+                }
+            )
+            professor_logado.senha = hash_senha
+            professor_logado.save(update_fields=["senha"])
 
             with transaction.atomic():
                 for d in diarios_api:
                     componente_curricular = d["componente_curricular"].split(' - ')
                     disciplina, _ = Disciplina.objects.get_or_create(
-                        id = str(int(d["id"])+1),
-                        defaults={
-                            "sigla": componente_curricular[0],
-                            "nome": componente_curricular[1],
-                            "nivel": componente_curricular[2]}
+                        id_suap = int(d["id"])+1,
+                        sigla=componente_curricular[0],
+                        nome=componente_curricular[1],
+                        nivel=componente_curricular[2]
                     )
                     
                     diario, _ = Diario.objects.get_or_create(
-                        id = d["id"],
+                        id_suap = d["id"],
+                        disciplina=disciplina,
                         defaults={
-                        "disciplina": disciplina,
                         "local": d["locais_de_aula"][0]
                         }
                     )
@@ -135,25 +157,18 @@ def registrar_professor(request):
                         )
 
                     for p in d["professores"]:
-                        if matricula == p["matricula"]:
-                            professor, _ = Professor.objects.get_or_create(
-                                matricula=p["matricula"],
-                                defaults={
-                                    "nome": p["nome"],
-                                    "senha": hashlib.sha256(senha.encode()).hexdigest()
-                                }
-                            )
+                        if p["matricula"] == matricula:
+                            professor = professor_logado
                         else:
                             professor, _ = Professor.objects.get_or_create(
                                 matricula=p["matricula"],
-                                defaults={
-                                    "nome": p["nome"]
-                                }
+                                defaults={"nome": p["nome"]}
                             )
+
                         ProfessorDiario.objects.get_or_create(
                             professor=professor,
                             diario=diario
-                        )   
+                        ) 
 
                     for alu in d["participantes"]:
                         aluno, _ = Aluno.objects.get_or_create(
@@ -185,24 +200,37 @@ def registrar_professor(request):
                             }
                         )
 
-            return redirect("listar-diario")
+            return redirect("listar-diarios")
 
     else:
         form = ProfessorForm()
 
     return render(request, "paginas/formProfessor.html", {"form": form})
 
-class DisciplinaList(ListView):
-    model = Disciplina
-    template_name = 'paginas/listas/disciplina.html'
 
 class DiarioList(ListView):
     model = Diario
     template_name = 'paginas/listas/diario.html'
 
-class AulaList(ListView):
-    model = Aula
-    template_name = 'paginas/listas/aula.html'
+def listar_aulas(request, diario_id):
+    diario = get_object_or_404(Diario, id_suap=diario_id)
+
+    aulas = Aula.objects.filter(diario=diario).order_by("data")
+
+    return render(request, "paginas/listas/aula.html", {
+        "diario": diario,
+        "aulas": aulas
+    })
+
+def listar_alunos(request, diario_id):
+    diario = get_object_or_404(Diario, id_suap=diario_id)
+
+    alunos = AlunoDiario.objects.filter(diario=diario)
+
+    return render(request, "paginas/listas/aluno.html", {
+        "diario": diario,
+        "alunos": alunos
+    })
 
 class AlunoList(ListView):
     model = Aluno

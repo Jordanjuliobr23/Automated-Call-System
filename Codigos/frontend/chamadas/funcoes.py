@@ -1,6 +1,6 @@
 import qrcode, io, base64
 
-URL = f"http://localhost:8000/aluno/"
+URL = f"http://192.168.0.6:80/aluno/"
 
 def qr_image(codigo: str):  
     img = qrcode.make(f"{URL}{codigo}")

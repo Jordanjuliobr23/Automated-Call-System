@@ -30,7 +30,7 @@ class DiarioHorarioInline(admin.TabularInline):
     extra = 1
 @admin.register(Diario)
 class DiarioAdmin(admin.ModelAdmin):
-    list_display = ("id", "disciplina")
+    list_display = ("id_suap", "disciplina")
     inlines = [DiarioHorarioInline]
 
 
