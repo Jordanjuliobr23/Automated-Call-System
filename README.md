@@ -1,51 +1,63 @@
-# 📲🔳🏷️Automated Call System 
+# 📲🔳 🏷️SCAPS - Sistema de Chamadas Automáticas para o SUAP
 
-## 📋 About the project:
-- This is a academy project from discipline **Integrative Project**
-- The project consists of developing a solution for classroom attendance automation.
-- Authentication occurs through an application that generates QR codes, which redirects to the IFRN institutional login page (SUAP).
-- After the student has been redirected to the SUAP portal, they will authenticate with their enrollment number and institutional password. This will allow the system to confirm their attendance in the current class.
+## 📋 Sobre o projeto:
+Trata-se de um projeto acadêmico referente a disciplina de Seminário de Orientação ao Projeto Integrador.
+O projeto consiste no desenvolvimento de uma solução para automação da presença em sala de aula.
+O sistema utiliaza-se de teconologia QR para realizar a autenticação dos discentes, com o número de matricula e senha institucional.
+A solução está atrelada ao Sistema Unificado de Admiministração Pública (SUAP). 
+
+## ✅ Objetivos:
+#### Otimizar o tempo destinado a frequência em sala de aula 
+#### Redução de falhas humanas 
+#### Foco em organização, confiabilidade e integração com sistemas institucionais
+
+## 🤖 Teconologias e ferramentas:
+### Backend e Dashboard:
+####  🐍 Python
+#### 📊 Django
+
+### Banco de Dados
+🛢 PostgreSQL
+
+### Infraestrutura
+#### 🐳 Docker
+#### 🏗️ Docker Compose
+
+### Rede e Acesso
+🌐 Nginx (proxy reverso)
 
 
----
-
-## ⚙︎ Manager from the project:
 
 
-## 🛠️ Project Structure
+🛠️ Composição:
 
-This project is divided into multiple services:
 
-- **Frontend (Django)** — responsável: Ian Guilherme 
-- **Banco de Dados** — responsável: Tamires Angélica
-- **Docker Compose** — responsável: Jordan Julio 
-- **Nginx Proxy** — responsável: Pedro Jordan
 
----
 
-## 🚀 How to Run the Proxy (Nginx)
+🛠️ Estrutura do Projeto
+Este projeto é dividido em múltiplos serviços:
 
-The Nginx proxy routes requests to the frontend and backend services and serves static files.
+Frontend (Django) — responsável: Ian Guilherme
+Banco de Dados — responsável: Tamires Angélica
+Docker Compose — responsável: Jordan Julio
+Nginx Proxy — responsável: Pedro Jordan
+🚀 Como Executar o Proxy (Nginx)
+O proxy Nginx roteia requisições para os serviços frontend e backend e serve arquivos estáticos.
 
-### Prerequisites
-- Docker and Docker Compose installed
-- Services `frontend` and `backend` must be running on the same Docker network (`qr_network`)
+Pré-requisitos
+Docker e Docker Compose instalados
+Serviços e devem estar rodando na mesma rede Docker (frontendbackendqr_network)
+###Commands para ligar os contêineres
 
-###Commands to start the containers
+*Insira o diretório de Códigos: cd .\Codigos\
 
-*Enter the Codes directory:
-cd .\Codigos\
+*Então execute os comandos abaixo:
 
-*Then execute the commands below:
+Compilação Docker Compose Docker Compose -D
 
-docker compose compilation
-docker compose -d
+NOTA: Abra o Docker Desktop antes de iniciar o processo.
 
-***NOTE: Open Docker Desktop before starting the process.
-
-Access the browser:
-Django:
-http://localhost:8000
+Acesse o navegador: Django: http://localhost:8000
 
 http://localhost:8001/gera_qr
 
