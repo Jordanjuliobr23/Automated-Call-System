@@ -16,49 +16,22 @@ A solução está atrelada ao Sistema Unificado de Admiministração Pública (S
 ####  🐍 Python
 #### 📊 Django
 
-### Banco de Dados
+### Banco de Dados:
 🛢 PostgreSQL
 
-### Infraestrutura
+### Infraestrutura:
 #### 🐳 Docker
 #### 🏗️ Docker Compose
 
-### Rede e Acesso
+### Rede e Acesso:
 🌐 Nginx (proxy reverso)
 
 
+## 🛠️ Composição:
+![](Documents/funcionamento.png)
 
 
-🛠️ Composição:
 
 
-
-
-🛠️ Estrutura do Projeto
-Este projeto é dividido em múltiplos serviços:
-
-Frontend (Django) — responsável: Ian Guilherme
-Banco de Dados — responsável: Tamires Angélica
-Docker Compose — responsável: Jordan Julio
-Nginx Proxy — responsável: Pedro Jordan
-🚀 Como Executar o Proxy (Nginx)
-O proxy Nginx roteia requisições para os serviços frontend e backend e serve arquivos estáticos.
-
-Pré-requisitos
-Docker e Docker Compose instalados
-Serviços e devem estar rodando na mesma rede Docker (frontendbackendqr_network)
-###Commands para ligar os contêineres
-
-*Insira o diretório de Códigos: cd .\Codigos\
-
-*Então execute os comandos abaixo:
-
-Compilação Docker Compose Docker Compose -D
-
-NOTA: Abra o Docker Desktop antes de iniciar o processo.
-
-Acesse o navegador: Django: http://localhost:8000
-
-http://localhost:8001/gera_qr
 
 
